@@ -16,7 +16,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="stylesheet" href="https://use.typekit.net/jka5wdi.css" />
+          <link rel="stylesheet" href="https://use.typekit.net/ubr3lbn.css" />{' '}
         </Head>
         <body>
           <Main />

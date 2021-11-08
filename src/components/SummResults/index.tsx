@@ -4,8 +4,6 @@ import MatchCard from '../MatchCard';
 import { listWrapper, resultsModal } from './SummResults.css';
 import { ResultsProps } from '@/utils/types';
 
-// const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
-
 const SummResults: React.FC<ResultsProps> = (props: ResultsProps) => {
   const { summQuery, data, staticData } = props;
 

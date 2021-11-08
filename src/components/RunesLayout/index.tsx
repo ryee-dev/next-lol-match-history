@@ -1,8 +1,9 @@
-import React from "react";
-import { Container, Image } from "theme-ui";
-import { css } from "@emotion/react";
+import React from 'react';
+import { Container, Image } from 'theme-ui';
+import { css } from '@emotion/react';
 
 const runesContainer = css`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;

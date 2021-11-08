@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 const resultsModal = css`
   box-sizing: border-box;
@@ -34,7 +34,7 @@ const listWrapper = css`
   //max-width: 800px;
 
   h1 {
-    font-family: Paralucent, sans-serif;
+    font-family: 'Transat Text', sans-serif;
     font-weight: lighter;
     letter-spacing: 4px;
     text-transform: lowercase;

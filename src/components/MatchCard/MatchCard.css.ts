@@ -43,7 +43,7 @@ const cardRow = css`
 `;
 
 const cardCol = css`
-  width: 100%;
+  position: relative;
   height: 100%;
   margin: 0 0.4rem;
   display: flex;
@@ -69,43 +69,40 @@ const cardCol = css`
 `;
 
 const itemContainer = css`
+  position: relative;
   display: flex;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
 
-  div {
-    &.row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding: 0.1rem 0;
-    }
+  .row {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0.1rem 0;
 
-    &.img-wrapper {
+    .img-wrapper {
       position: relative;
-      margin: 0 0.1rem;
-      height: 50px;
-      width: 50px;
+      margin: 0 0.1rem !important;
 
-      .empty {
-        height: 100%;
-        width: 100%;
+      .trinket {
         background-color: white;
-        opacity: 0.5;
       }
 
-      .item-img {
-        margin-left: 0.4rem;
-        max-width: 25px;
-        max-height: 25px;
+      .empty {
+        height: 50px;
+        width: 50px;
+        background-color: white;
+        opacity: 0.5;
       }
     }
   }
 
   img {
-    height: 50px;
-    width: 50px;
+    //height: 50px;
+    //width: 50px;
     //border: 2px solid white;
     //background-color: white;
   }

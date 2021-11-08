@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { MatchDataProps, MatchProps } from '@/utils/types';
-import { Box } from 'theme-ui';
-import RunesLayout from '../RunesLayout';
+import { Box, Container } from 'theme-ui';
+// import RunesLayout from '../RunesLayout';
 import { handleConvertSecToMin } from '@/utils/helpers';
 import Image from 'next/image';
 
@@ -77,8 +77,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
     const { item0, item1, item2, item3, item4, item5, item6 } = items;
     // console.log(staticData.champions[championName]);
 
-    setChampionName(staticData.champions[championId]);
-    console.log(championName);
+    // console.log(championName);
 
     setMatchData({
       spells: {
@@ -103,8 +102,13 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
     setGameLength(handleConvertSecToMin(gameDuration));
   }, [gameDuration, gameStartTimestamp]);
 
+  useEffect(() => {
+    console.log(staticData.champions[championId]);
+    setChampionName(staticData.champions[championId]);
+  }, []);
+
   return (
-    <Box
+    <Container
       css={cardWrapper}
       style={
         win ? { backgroundColor: `#b6f7c1` } : { backgroundColor: `#ffcccc` }
@@ -147,7 +151,6 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
             />
           </Box>
         </Box>
-
         <Box css={cardCol} className="center">
           <p>
             {kills}/<span style={{ color: `#be3044` }}>{deaths}</span>/{assists}
@@ -169,6 +172,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
                     alt={`${matchData.items.item0}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -181,6 +185,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
                     alt={`${matchData.items.item1}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -193,6 +198,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
                     alt={`${matchData.items.item2}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -201,11 +207,12 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
               <div className="img-wrapper">
                 {matchData.items.item6 !== 0 ? (
                   <Image
-                    className="item-img"
+                    className="trinket"
                     src={`https://ddragon.leagueoflegends.com/cdn/11.20.1/img/item/${matchData.items.item6}.png`}
                     alt={`${matchData.items.item6}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -220,6 +227,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
                     alt={`${matchData.items.item4}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -232,6 +240,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
                     alt={`${matchData.items.item5}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -244,6 +253,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
                     alt={`${matchData.items.item3}`}
                     height={50}
                     width={50}
+                    layout="fixed"
                   />
                 ) : (
                   <div className="empty" />
@@ -252,9 +262,9 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
             </div>
           </Box>
         </Box>
-        <RunesLayout />
       </Box>
-    </Box>
+      {/*<RunesLayout />*/}
+    </Container>
   );
 };
 

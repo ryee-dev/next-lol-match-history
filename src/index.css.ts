@@ -11,7 +11,7 @@ export const appShell = css`
   flex-direction: column;
   background-color: #f6f5f5;
   overflow: auto;
-  font-family: 'Kyrial Display Pro', sans-serif;
+  font-family: 'Arboria', sans-serif;
 
   .close {
     position: absolute;
@@ -26,7 +26,7 @@ export const appShell = css`
   }
 
   h1 {
-    font-family: Leixo, sans-serif;
+    font-family: 'Transat Text', sans-serif;
     font-size: 1.8rem;
     transition: letter-spacing 0.4s ease-in-out, font-size 0.4s ease-in-out;
   }

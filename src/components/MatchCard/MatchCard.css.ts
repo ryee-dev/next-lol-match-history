@@ -39,7 +39,11 @@ const cardRow = css`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-top: 1rem;
   //border: 1px dotted black;
+
+  .spell-image {
+  }
 `;
 
 const cardCol = css`
@@ -54,6 +58,10 @@ const cardCol = css`
   &.center {
     align-items: center;
     padding: 0 0.5rem;
+
+    .champion-img {
+      margin-bottom: 1rem;
+    }
   }
 
   .spell {

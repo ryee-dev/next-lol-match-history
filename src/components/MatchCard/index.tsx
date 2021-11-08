@@ -126,28 +126,31 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
         </Box>
         <Box css={cardCol} className="center">
           <Image
-            className="champion"
+            className="champion-img"
             src={`https://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/${championName}.png`}
             alt={`${championName}`}
             data-tip={`${championName}`}
-            height={50}
-            width={50}
+            height={100}
+            width={100}
+            layout="fixed"
           />
           <ReactTooltip place="top" type="dark" effect="float" />
           <Box css={cardRow}>
             <Image
-              className="spell"
+              className="spell-image"
               src={`https://ddragon.leagueoflegends.com/cdn/11.20.1/img/spell/${matchData.spells.summAName}.png`}
               alt={`${matchData.spells.summAName}`}
               height={50}
               width={50}
+              layout="fixed"
             />
             <Image
-              className="spell"
+              className="spell-image"
               src={`https://ddragon.leagueoflegends.com/cdn/11.20.1/img/spell/${matchData.spells.summBName}.png`}
               alt={`${matchData.spells.summBName}`}
               height={50}
               width={50}
+              layout="fixed"
             />
           </Box>
         </Box>

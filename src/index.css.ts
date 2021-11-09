@@ -59,3 +59,15 @@ export const modalWrapper = css`
   z-index: 2;
   box-sizing: border-box;
 `;
+
+export const spinnerWrapper = css`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+`;

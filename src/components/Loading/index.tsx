@@ -8,6 +8,9 @@ const loadingWrapper = css`
   align-items: center;
   justify-content: center;
   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
 
   h1 {
     color: white;

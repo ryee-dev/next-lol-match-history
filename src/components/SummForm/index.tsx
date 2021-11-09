@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import RorLogo from 'src/public/ror-logo.svg';
 
 import {
@@ -10,9 +10,9 @@ import {
 import Image from 'next/image';
 
 interface Props {
-  setSummName: any;
+  setSummName: Dispatch<SetStateAction<string>>;
   summQuery: string;
-  setSummQuery: any;
+  setSummQuery: Dispatch<SetStateAction<string>>;
   summName: string;
 }
 

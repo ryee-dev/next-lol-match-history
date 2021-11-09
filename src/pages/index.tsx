@@ -1,14 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { Container } from '@chakra-ui/react';
-import { Loading, SummForm, SummResults } from '../components';
-import CloseIcon from '../public/close.svg';
+import { Container, Spinner } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import { appOverlay, appShell, modalWrapper } from '@/index.css';
+import {
+  appOverlay,
+  appShell,
+  modalWrapper,
+  spinnerWrapper,
+} from '@/index.css';
 import { DDragon } from '@fightmegg/riot-api';
-import Error from 'next/error';
 import { BuildStaticData } from '@/utils/buildStaticData';
 import useSWR from 'swr';
+import { SummForm, SummResults } from '@/components';
+import Error from 'next/error';
+import CloseIcon from '../public/close.svg';
 
 const fetcher = async (url: RequestInfo) =>
   await fetch(url).then((res) => res.json());
@@ -56,7 +61,7 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   const [summQuery, setSummQuery] = useState(``);
   const [staticData, setStaticData] = useState(null);
 
-  const { data } = useSWR(
+  const { data, isValidating } = useSWR(
     summQuery.length !== 0 ? '/api/summoner/' : null,
     fetcher,
     {
@@ -91,9 +96,11 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
     }
   };
 
-  // useEffect(() => {
-  //   data && console.log(data);
-  // }, [data]);
+  useEffect(() => {
+    // data && console.log(data);
+    console.log(isValidating);
+    isValidating ? setLoading(true) : setLoading(false);
+  }, [isValidating]);
 
   useEffect(() => {
     const formattedStaticData = BuildStaticData(rawStaticData);
@@ -103,13 +110,18 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
 
   return (
     <Container maxW="auto" css={appShell} onKeyDown={handleEscClose}>
+      {loading && (
+        <div css={spinnerWrapper}>
+          <Spinner size="xl" sx={{ zIndex: 5 }} />
+        </div>
+      )}
+
       <SummForm
         setSummName={setSummName}
         setSummQuery={setSummQuery}
         summName={summName}
         summQuery={summQuery}
       />
-      {summQuery !== `` && loading && <Loading />}
       {!loading && modalStatus && pageError && <Error statusCode={404} />}
       {modalStatus && !loading && (
         <div css={modalWrapper} ref={ref}>

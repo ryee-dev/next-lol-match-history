@@ -6,8 +6,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/react": "^11.5.0",
+    "@chakra-ui/react": "^1.6.12",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@fightmegg/riot-api": "^0.0.8",
+    "framer-motion": "^4",
     "fs": "^0.0.1-security",
     "ky": "^0.28.6",
     "next": "latest",

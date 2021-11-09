@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Image } from 'theme-ui';
+import { Container, Image } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 
 const runesContainer = css`

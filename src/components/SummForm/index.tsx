@@ -1,5 +1,4 @@
 import React from 'react';
-// import RorLogo from "@/assets/ror-logo.svg";
 import RorLogo from 'src/public/ror-logo.svg';
 
 import {
@@ -8,7 +7,6 @@ import {
   summInput,
   summonerForm,
 } from './SummForm.css';
-// import { Image } from 'theme-ui';
 import Image from 'next/image';
 
 interface Props {

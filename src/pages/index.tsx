@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import { Container } from 'theme-ui';
+import { Container } from '@chakra-ui/react';
 import { Loading, SummForm, SummResults } from '../components';
 import CloseIcon from '../public/close.svg';
 import { NextPage } from 'next';
@@ -102,7 +102,7 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   }, []);
 
   return (
-    <Container css={appShell} onKeyDown={handleEscClose}>
+    <Container maxW="auto" css={appShell} onKeyDown={handleEscClose}>
       <SummForm
         setSummName={setSummName}
         setSummQuery={setSummQuery}

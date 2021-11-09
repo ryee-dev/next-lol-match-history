@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { MatchDataProps, MatchProps } from '@/utils/types';
-import { Box, Container } from 'theme-ui';
+import { Box, Container } from '@chakra-ui/react';
 // import RunesLayout from '../RunesLayout';
 import { handleConvertSecToMin } from '@/utils/helpers';
 import Image from 'next/image';
@@ -109,6 +109,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
 
   return (
     <Container
+      maxW="auto"
       css={cardWrapper}
       style={
         win ? { backgroundColor: `#b6f7c1` } : { backgroundColor: `#ffcccc` }

@@ -10,6 +10,8 @@ const resultsModal = css`
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
+  //position: relative;
+  z-index: 1;
 
   svg {
     position: absolute;
@@ -31,6 +33,8 @@ const listWrapper = css`
   flex-direction: column;
   background-color: #dadddf;
   overflow: auto;
+  z-index: 1;
+  padding: 1rem;
   //max-width: 800px;
 
   h1 {

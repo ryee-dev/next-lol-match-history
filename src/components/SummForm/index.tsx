@@ -14,13 +14,16 @@ interface Props {
   summQuery: string;
   setSummQuery: Dispatch<SetStateAction<string>>;
   summName: string;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const SummForm: React.FC<Props> = (props: Props) => {
-  const { setSummName, setSummQuery, summName } = props;
+  const { setSummName, summName, summQuery, setSummQuery, setLoading } = props;
 
   const handlePostData = async () => {
     setSummQuery(summName);
+    setLoading(true);
+    console.log(summQuery);
     await fetch('/api/summoner/', {
       method: 'POST',
       headers: {
@@ -28,13 +31,6 @@ const SummForm: React.FC<Props> = (props: Props) => {
       },
       body: JSON.stringify({ summName }),
     });
-
-    // const data = await response.json();
-    // console.log(data);
-
-    // setTimeout(() => {
-    //   updateParams();
-    // }, 3000);
   };
 
   return (

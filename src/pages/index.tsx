@@ -1,19 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useOnClickOutside from 'use-onclickoutside';
+import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import {
-  appOverlay,
-  appShell,
-  modalWrapper,
-  spinnerWrapper,
-} from '@/index.css';
+import { appOverlay, appShell, modalWrapper, spinnerWrapper } from '@/index.css';
 import { DDragon } from '@fightmegg/riot-api';
 import { BuildStaticData } from '@/utils/buildStaticData';
 import useSWR from 'swr';
 import { SummForm, SummResults } from '@/components';
 import Error from 'next/error';
-import CloseIcon from '../public/close.svg';
+import useOnClickOutside from 'use-onclickoutside';
+
+// import CloseIcon from '../public/close.svg';
+// import Image from 'next/image';
 
 const fetcher = async (url: RequestInfo) =>
   await fetch(url).then((res) => res.json());
@@ -52,6 +49,7 @@ export const getStaticProps = async () => {
 
 const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   // const { champList, itemList, spellList, runeList } = rawStaticData;
+  const ref = React.useRef(null);
 
   const [modalStatus, setModalStatus] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,6 +58,15 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   const [summName, setSummName] = useState(``);
   const [summQuery, setSummQuery] = useState(``);
   const [staticData, setStaticData] = useState(null);
+
+  const closeModal = () => {
+    setModalStatus(false);
+    setSummData(null);
+    setSummQuery(``);
+    setSummName(``);
+  };
+
+  useOnClickOutside(ref, closeModal);
 
   const { data, isValidating } = useSWR(
     summQuery.length !== 0 ? '/api/summoner/' : null,
@@ -74,21 +81,11 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
       },
       onError: (err) => {
         setPageError(true);
+        setLoading(false);
         console.log(err);
       },
     }
   );
-
-  const closeModal = () => {
-    setModalStatus(false);
-    setSummData(null);
-    setSummQuery(``);
-    setSummName(``);
-  };
-
-  const ref = useRef(null);
-
-  useOnClickOutside(ref, closeModal);
 
   const handleEscClose = (e: { keyCode: number }) => {
     if (e.keyCode === 27) {
@@ -97,8 +94,7 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   };
 
   useEffect(() => {
-    // data && console.log(data);
-    console.log(isValidating);
+    console.log(`loading: ${isValidating}`);
     isValidating ? setLoading(true) : setLoading(false);
   }, [isValidating]);
 
@@ -106,22 +102,18 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
     const formattedStaticData = BuildStaticData(rawStaticData);
     // @ts-ignore
     setStaticData(formattedStaticData);
-  }, []);
+  }, [rawStaticData]);
 
   return (
     <Container maxW="auto" css={appShell} onKeyDown={handleEscClose}>
-      {loading && (
-        <div css={spinnerWrapper}>
-          <Spinner size="xl" sx={{ zIndex: 5 }} />
-        </div>
-      )}
-
       <SummForm
         setSummName={setSummName}
         setSummQuery={setSummQuery}
         summName={summName}
         summQuery={summQuery}
+        setLoading={setLoading}
       />
+
       {!loading && modalStatus && pageError && <Error statusCode={404} />}
       {modalStatus && !loading && (
         <div css={modalWrapper} ref={ref}>
@@ -132,10 +124,24 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
           />
         </div>
       )}
-      {summQuery !== `` && <div css={appOverlay} />}
-      {modalStatus && !loading && (
-        <img src={CloseIcon} alt="close-icon" onClick={closeModal} />
+
+      {loading && (
+        <div css={spinnerWrapper}>
+          <Spinner size="xl" sx={{ zIndex: 5 }} />
+        </div>
       )}
+
+      {(loading || modalStatus) && <div css={appOverlay} />}
+
+      {/*{modalStatus && !loading && (*/}
+      {/*  <Image*/}
+      {/*    src={CloseIcon}*/}
+      {/*    alt="close-icon"*/}
+      {/*    height={30}*/}
+      {/*    width={30}*/}
+      {/*    onClick={closeModal}*/}
+      {/*  />*/}
+      {/*)}*/}
     </Container>
   );
 };

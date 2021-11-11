@@ -42,7 +42,7 @@ export const appOverlay = css`
   width: 100vw;
   background-color: black;
   opacity: 0.75;
-  z-index: 1;
+  z-index: 2;
 `;
 
 export const modalWrapper = css`
@@ -56,7 +56,7 @@ export const modalWrapper = css`
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: 6px;
-  z-index: 2;
+  z-index: 5;
   box-sizing: border-box;
 `;
 
@@ -69,5 +69,5 @@ export const spinnerWrapper = css`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 3;
 `;

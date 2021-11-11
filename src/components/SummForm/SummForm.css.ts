@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 const formContainer = css`
   height: 100%;
@@ -10,7 +10,8 @@ const formContainer = css`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  //z-index: 2;
+  position: relative;
+  z-index: 2;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
 
   overflow: auto;
@@ -31,11 +32,9 @@ const summonerForm = css`
 `;
 
 const summInput = css`
-  //box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.25);
   outline: none;
   border: none;
   padding: 0.6rem 1rem;
-  //width: 25%;
   border-radius: 2px;
   margin: 1rem;
   transition: all 0.2s ease-in-out;

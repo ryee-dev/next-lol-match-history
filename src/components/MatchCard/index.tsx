@@ -105,10 +105,11 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
   useEffect(() => {
     console.log(staticData.champions[championId]);
     setChampionName(staticData.champions[championId]);
-  }, []);
+  }, [championId, staticData.champions]);
 
   return (
     <Container
+      p={'1rem'}
       maxW="auto"
       css={cardWrapper}
       style={
@@ -163,7 +164,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
 
           <p>level: {champLevel}</p>
           <p>
-            {getTotalCS()} ({getCsPerMin()}) CS
+            {getTotalCS()} ({getCsPerMin()}/min) CS
           </p>
         </Box>
         <Box css={cardCol} className="items">

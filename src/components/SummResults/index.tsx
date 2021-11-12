@@ -9,8 +9,8 @@ const SummResults: React.FC<ResultsProps> = (props: ResultsProps) => {
 
   return (
     <div css={resultsModal}>
+      <h1>{summQuery}</h1>
       <div css={listWrapper}>
-        <h1>{summQuery}</h1>
         {data &&
           data.map((match: any, index: number) => {
             return (

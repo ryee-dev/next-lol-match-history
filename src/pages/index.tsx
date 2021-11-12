@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import { appOverlay, appShell, modalWrapper, spinnerWrapper } from '@/index.css';
+import { appShell, modalWrapper, spinnerWrapper } from '@/index.css';
 import { DDragon } from '@fightmegg/riot-api';
 import { BuildStaticData } from '@/utils/buildStaticData';
 import useSWR from 'swr';
 import { SummForm, SummResults } from '@/components';
-import Error from 'next/error';
 import useOnClickOutside from 'use-onclickoutside';
+import { motion } from 'framer-motion';
 
 // import CloseIcon from '../public/close.svg';
 // import Image from 'next/image';
 
 const fetcher = async (url: RequestInfo) =>
   await fetch(url).then((res) => res.json());
+
+const variants = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: '-100%' },
+};
 
 export const getStaticProps = async () => {
   const ddragon = new DDragon();
@@ -40,12 +45,6 @@ export const getStaticProps = async () => {
     },
   };
 };
-
-// async function getSummData() {
-//   const res = await fetch('');
-//   console.log(res);
-//   return res;
-// }
 
 const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   // const { champList, itemList, spellList, runeList } = rawStaticData;
@@ -113,25 +112,27 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
         summQuery={summQuery}
         setLoading={setLoading}
       />
-
-      {!loading && modalStatus && pageError && <Error statusCode={404} />}
-      {modalStatus && !loading && (
-        <div css={modalWrapper} ref={ref}>
-          <SummResults
-            staticData={staticData}
-            data={summData}
-            summQuery={summQuery}
-          />
-        </div>
-      )}
-
       {loading && (
         <div css={spinnerWrapper}>
           <Spinner size="xl" sx={{ zIndex: 5 }} />
         </div>
       )}
+      {modalStatus && !loading && (
+        <motion.div
+          animate={modalStatus ? 'visible' : 'hidden'}
+          variants={variants}
+          css={modalWrapper}
+          ref={ref}
+        >
+          <SummResults
+            staticData={staticData}
+            data={summData}
+            summQuery={summQuery}
+          />
+        </motion.div>
+      )}
 
-      {(loading || modalStatus) && <div css={appOverlay} />}
+      {/*{(loading || modalStatus) && <div css={appOverlay} />}*/}
 
       {/*{modalStatus && !loading && (*/}
       {/*  <Image*/}

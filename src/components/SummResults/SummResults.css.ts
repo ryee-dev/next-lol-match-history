@@ -9,8 +9,10 @@ const resultsModal = css`
   justify-content: flex-start;
   flex-direction: column;
   overflow-x: hidden;
-  overflow-y: auto;
-  //position: relative;
+  overflow-y: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
 
   svg {
@@ -19,34 +21,33 @@ const resultsModal = css`
     right: 0;
     padding: 1rem;
   }
-`;
-
-const listWrapper = css`
-  //height: 50%;
-  //padding: 0 2rem;
-  position: absolute;
-  //padding: 0 1rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  background-color: #dadddf;
-  overflow: auto;
-  z-index: 1;
-  padding: 1rem;
-  //max-width: 800px;
 
   h1 {
-    font-family: 'Transat Text', sans-serif;
-    font-weight: lighter;
-    letter-spacing: 4px;
-    text-transform: lowercase;
-    font-size: 3rem;
+    font-family: 'ClanOT-Bold', sans-serif;
+    //font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 5rem;
     color: #212121;
     text-align: left;
     min-width: 800px;
+    margin: 1rem 0 0 -5rem;
+    position: absolute;
   }
+`;
+
+const listWrapper = css`
+  position: relative;
+  //margin-top: 8rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: auto;
+  z-index: 1;
+  padding: 0.4rem 1rem;
+  height: 100%;
 `;
 
 export { resultsModal, listWrapper };

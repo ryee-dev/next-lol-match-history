@@ -123,8 +123,9 @@ export default async function handler(req, res) {
   const searchSummoner = async (summNameInput) => {
     const matchIdList = [];
     const finalResponse = [];
+    const formattedSummName = summNameInput.replaceAll(' ', '');
 
-    const riftMatchHistory = await handleGetMatchHistory(summNameInput);
+    const riftMatchHistory = await handleGetMatchHistory(formattedSummName);
 
     for (const element of riftMatchHistory) {
       matchIdList.push(element.gameId);
@@ -133,7 +134,7 @@ export default async function handler(req, res) {
     for (let i = 0; i < 5; i++) {
       // eslint-disable-next-line no-await-in-loop
       await handleGetMatch(riftMatchHistory[i]).then((res) => {
-        finalResponse.push(handleBuildData(res, summNameInput));
+        finalResponse.push(handleBuildData(res, formattedSummName));
       });
     }
     return finalResponse;

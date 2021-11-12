@@ -7,9 +7,8 @@ export const appShell = css`
   padding: 4rem 3rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #f6f5f5;
+  justify-content: flex-start;
+  background-color: #e6e6e6;
   overflow: auto;
   font-family: 'Arboria', sans-serif;
 
@@ -46,14 +45,13 @@ export const appOverlay = css`
 `;
 
 export const modalWrapper = css`
-  position: absolute;
-  max-width: 960px;
-  width: 80%;
-  height: 80%;
+  position: relative;
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   border-radius: 6px;
   z-index: 5;

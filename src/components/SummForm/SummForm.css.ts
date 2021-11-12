@@ -1,19 +1,18 @@
 import { css } from '@emotion/react';
 
 const formContainer = css`
-  height: 100%;
-  background-color: #dadddf;
+  //width: 100%;
   border-radius: 4px;
-  width: 100%;
   max-width: 1200px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
-  position: relative;
+  //position: absolute;
+  //left: 0;
+  //top: 50%;
   z-index: 2;
-  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
-
+  padding-left: 2.4rem;
   overflow: auto;
 
   h1 {
@@ -22,62 +21,66 @@ const formContainer = css`
 `;
 
 const summonerForm = css`
-  width: 100%;
-  margin-top: 5rem;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
   border-radius: 6px;
+
+  .validation-error {
+    text-transform: uppercase;
+    color: #f07178;
+  }
+
+  .tooltip {
+    margin-top: 1rem !important;
+    display: block;
+    visibility: visible !important;
+  }
 `;
 
 const summInput = css`
-  outline: none;
-  border: none;
-  padding: 0.6rem 1rem;
+  font-family: ClanOT-Book, sans-serif;
+  text-transform: uppercase;
+  color: #5d5e5a;
+  outline: 0;
   border-radius: 2px;
-  margin: 1rem;
+  margin: 1rem 1rem 1rem 0;
   transition: all 0.2s ease-in-out;
-  background-color: #f3f8ff;
-  caret-color: #565b63;
-  color: #565b63;
-  width: 25%;
+  border-width: 0 0 2px;
+  border-color: #5d5e5a;
+  background-color: transparent;
+  padding-bottom: 2px;
+  min-width: 300px;
+  //width: 100%;
 
   ::placeholder {
     color: #565b63;
   }
-
-  &:focus {
-    transform: scale(1.15);
-    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
-  }
 `;
 
 const submitButt = css`
-  //width: 10%;
-  margin-top: 1rem;
-  padding: 0.6rem 2rem;
+  position: relative;
+  font-family: ClanOT-Book, sans-serif;
+  margin-top: 0.4rem;
+  padding: 0.4rem 2rem;
   text-decoration: none;
   outline: none;
-  //border: none;
-  border-radius: 6px;
   background-color: transparent;
   border: solid #5d5e5a 1px;
-  //color: white;
   color: #5d5e5a;
   cursor: pointer;
   font-weight: bold;
   letter-spacing: 1px;
   text-align: center;
-
-  transition: background-color 0.2s ease-in-out, letter-spacing 0.2s ease-in-out,
-    color 0.2s ease-in-out;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  z-index: 3;
 
   &:hover {
-    //width: 25%;
+    color: #e6e6e6;
     background-color: #5d5e5a;
-    //letter-spacing: 4px;
-    color: white;
   }
 
   &:disabled {

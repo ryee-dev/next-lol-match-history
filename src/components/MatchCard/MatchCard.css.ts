@@ -10,7 +10,8 @@ const cardWrapper = css`
   margin: 0.4rem 0;
   color: #1c222b;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-  width: 800px;
+  //width: 800px;
+  max-width: 800px;
 
   p {
     font-size: 1rem;
@@ -32,6 +33,10 @@ const cardWrapper = css`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+  }
+
+  :first-child {
+    margin-top: 8rem;
   }
 `;
 

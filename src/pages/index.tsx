@@ -68,7 +68,7 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   useOnClickOutside(ref, closeModal);
 
   const { data, isValidating } = useSWR(
-    summQuery.length !== 0 ? '/api/summoner/' : null,
+    summQuery.length !== 0 && loading ? '/api/summoner/' : null,
     fetcher,
     {
       onSuccess: (data) => {

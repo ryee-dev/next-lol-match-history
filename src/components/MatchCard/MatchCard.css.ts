@@ -35,7 +35,7 @@ const cardWrapper = css`
     justify-content: space-evenly;
   }
 
-  :first-child {
+  :first-of-type {
     margin-top: 8rem;
   }
 `;

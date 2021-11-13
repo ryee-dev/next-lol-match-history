@@ -35,7 +35,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
 
   const handlePostData = async () => {
     setLoading(true);
-    // console.log(summQuery);
+    
     await fetch('/api/summoner/', {
       method: 'POST',
       headers: {
@@ -44,6 +44,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
       body: JSON.stringify({ summName }),
     }).then(() => {
       setSummQuery(summName);
+      setLoading(false);
     });
   };
 

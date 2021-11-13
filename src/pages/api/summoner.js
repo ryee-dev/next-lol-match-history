@@ -144,8 +144,9 @@ export default async function handler(req, res) {
     summNameInput = req.body.summName;
     res.status(204).send();
   } else if (req.method === 'GET') {
-    // console.log('get', summNameInput);
-    const data = await searchSummoner(summNameInput);
+    console.log('get', summNameInput.length);
+    const data =
+      summNameInput.length !== 0 && (await searchSummoner(summNameInput));
     res.status(200).json(data);
     // res.json(data);
   }

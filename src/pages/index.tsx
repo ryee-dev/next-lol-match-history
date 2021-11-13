@@ -103,6 +103,10 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
     setStaticData(formattedStaticData);
   }, [rawStaticData]);
 
+  useEffect(() => {
+    summData && console.log(summData);
+  }, [summData]);
+
   return (
     <Container maxW="auto" css={appShell} onKeyDown={handleEscClose}>
       <SummForm
@@ -131,18 +135,6 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
           />
         </motion.div>
       )}
-
-      {/*{(loading || modalStatus) && <div css={appOverlay} />}*/}
-
-      {/*{modalStatus && !loading && (*/}
-      {/*  <Image*/}
-      {/*    src={CloseIcon}*/}
-      {/*    alt="close-icon"*/}
-      {/*    height={30}*/}
-      {/*    width={30}*/}
-      {/*    onClick={closeModal}*/}
-      {/*  />*/}
-      {/*)}*/}
     </Container>
   );
 };

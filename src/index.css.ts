@@ -9,7 +9,7 @@ export const appShell = css`
   align-items: center;
   justify-content: flex-start;
   background-color: #e6e6e6;
-  overflow: auto;
+  overflow: hidden;
   font-family: 'Arboria', sans-serif;
 
   .close {
@@ -22,12 +22,6 @@ export const appShell = css`
     &:hover {
       cursor: pointer;
     }
-  }
-
-  h1 {
-    font-family: 'Transat Text', sans-serif;
-    font-size: 1.8rem;
-    transition: letter-spacing 0.4s ease-in-out, font-size 0.4s ease-in-out;
   }
 
   a {

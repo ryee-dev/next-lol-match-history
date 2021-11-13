@@ -103,7 +103,7 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
   }, [gameDuration, gameStartTimestamp]);
 
   useEffect(() => {
-    console.log(staticData.champions[championId]);
+    // console.log(staticData.champions[championId]);
     setChampionName(staticData.champions[championId]);
   }, [championId, staticData.champions]);
 

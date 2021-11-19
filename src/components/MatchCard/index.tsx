@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { MatchDataProps, MatchProps } from '@/utils/types';
 import { Box, Container } from '@chakra-ui/react';
-// import RunesLayout from '../RunesLayout';
 import { handleConvertSecToMin } from '@/utils/helpers';
 import Image from 'next/image';
+import { getCsPerMin, getTotalCS } from '@/components/MatchCard/helpers';
 
 import { cardCol, cardRow, cardWrapper, itemContainer } from './MatchCard.css';
 
@@ -30,6 +30,13 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
     neutralMinionsKilledEnemyJungle,
   } = props;
 
+  const minionsKilled = {
+    totalMinionsKilled,
+    neutralMinionsKilled,
+    neutralMinionsKilledTeamJungle,
+    neutralMinionsKilledEnemyJungle,
+  };
+
   const [championName, setChampionName] = useState('');
   const [matchData, setMatchData] = useState<MatchDataProps>({
     spells: {
@@ -51,33 +58,8 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
 
   const [gameLength, setGameLength] = useState(``);
 
-  const getTotalCS = () => {
-    let total;
-    if (
-      neutralMinionsKilledTeamJungle === undefined ||
-      neutralMinionsKilledEnemyJungle === undefined
-    ) {
-      total = totalMinionsKilled + neutralMinionsKilled;
-    } else {
-      total =
-        totalMinionsKilled +
-        neutralMinionsKilled +
-        neutralMinionsKilledTeamJungle +
-        neutralMinionsKilledEnemyJungle;
-    }
-    return total;
-  };
-
-  const getCsPerMin = () => {
-    const csPerMin = getTotalCS() / Math.floor(gameDuration / 60);
-    return csPerMin.toFixed(1);
-  };
-
   useEffect(() => {
     const { item0, item1, item2, item3, item4, item5, item6 } = items;
-    // console.log(staticData.champions[championName]);
-
-    // console.log(championName);
 
     setMatchData({
       spells: {
@@ -103,7 +85,6 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
   }, [gameDuration, gameStartTimestamp]);
 
   useEffect(() => {
-    // console.log(staticData.champions[championId]);
     setChampionName(staticData.champions[championId]);
   }, [championId, staticData.champions]);
 
@@ -164,7 +145,8 @@ const MatchCard: React.FC<MatchProps> = (props: MatchProps) => {
 
           <p>level: {champLevel}</p>
           <p>
-            {getTotalCS()} ({getCsPerMin()}/min) CS
+            {getTotalCS(minionsKilled)} (
+            {getCsPerMin(getTotalCS(minionsKilled), gameDuration)}/min) CS
           </p>
         </Box>
         <Box css={cardCol} className="items">

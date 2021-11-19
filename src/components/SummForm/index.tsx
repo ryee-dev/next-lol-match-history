@@ -6,7 +6,7 @@ import {
   summInput,
   summonerForm,
 } from './SummForm.css';
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Tooltip from '@/components/SummForm/Tooltip';
 
 interface Props {
@@ -22,7 +22,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
 
   const [invalidSummName, setInvalidSummName] = React.useState(false);
 
-  const validationRegex = /^[A-Za-z0-9-_]+$/i;
+  const validationRegex = /^[ A-Za-z0-9-_]+$/i;
 
   const {
     register,
@@ -35,7 +35,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
 
   const handlePostData = async () => {
     setLoading(true);
-    
+
     await fetch('/api/summoner/', {
       method: 'POST',
       headers: {
@@ -74,7 +74,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
             {...register('summName', {
               required: true,
               minLength: 4,
-              pattern: /^[A-Za-z0-9-_]+$/i,
+              pattern: /^[A-Za-z0-9-_]+(?:\s[A-Za-z0-9-_]+)?$/i,
             })}
             css={summInput}
             placeholder="Enter Summoner Name..."
@@ -88,6 +88,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
             onChange={handleOnChange}
             data-tip={'INVALID SUMMONER NAME'}
           />
+          <Box className="input-line" />
         </Flex>
         <button
           css={submitButt}

@@ -58,6 +58,19 @@ const summInput = css`
   ::placeholder {
     color: #565b63;
   }
+
+  //.input-line {
+  //  height: 2px;
+  //  width: 300px;
+  //  color: #5d5e5a;
+  //  transition: all 0.2s ease-in-out;
+  //}
+
+  &:focus {
+    //.input-line {
+    //  transform: scaleX(1.2);
+    //}
+  }
 `;
 
 const submitButt = css`

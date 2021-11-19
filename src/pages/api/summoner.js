@@ -124,7 +124,7 @@ export default async function handler(req, res) {
     const matchIdList = [];
     const finalResponse = [];
     const formattedSummName = summNameInput.replace(/ /g, '');
-    console.log(formattedSummName);
+    // console.log(formattedSummName);
 
     const riftMatchHistory = await handleGetMatchHistory(formattedSummName);
 
@@ -145,7 +145,6 @@ export default async function handler(req, res) {
     summNameInput = req.body.summName;
     res.status(204).send();
   } else if (req.method === 'GET') {
-    console.log('get', summNameInput);
     const data =
       summNameInput.length !== 0 && (await searchSummoner(summNameInput));
     res.status(200).json(data);

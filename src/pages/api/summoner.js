@@ -11,7 +11,7 @@ export const config = {
   },
 };
 
-let summNameInput = '';
+let summNameInput;
 
 export default async function handler(req, res) {
   const handleGetPuuid = async (summName) => {

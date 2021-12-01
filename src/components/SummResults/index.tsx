@@ -4,8 +4,26 @@ import MatchCard from '../MatchCard';
 import { listWrapper, resultsModal } from './SummResults.css';
 import { ResultsProps } from '@/utils/types';
 
+import { RootState } from '@/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { invalidate, validate } from '@/components/SummResults/resultsSlice';
+
 const SummResults: React.FC<ResultsProps> = (props: ResultsProps) => {
   const { summQuery, data, staticData } = props;
+  const resultsFetched = useSelector(
+    (state: RootState) => state.results.fetched
+  );
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (data) {
+      dispatch(validate());
+      console.log(resultsFetched);
+    } else {
+      dispatch(invalidate());
+      console.log(resultsFetched);
+    }
+  }, [resultsFetched, data, dispatch]);
 
   return (
     <div css={resultsModal}>

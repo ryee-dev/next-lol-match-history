@@ -8,17 +8,18 @@ import {
 } from './SummForm.css';
 import { Box, Flex } from '@chakra-ui/react';
 import Tooltip from '@/components/SummForm/Tooltip';
+import { useStore } from '@/store';
 
 interface Props {
   setSummName: Dispatch<SetStateAction<string>>;
-  summQuery: string;
-  setSummQuery: Dispatch<SetStateAction<string>>;
   summName: string;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const SummForm: React.FC<Props> = (props: Props) => {
-  const { setSummName, summName, setSummQuery, setLoading } = props;
+  const { setSummName, summName, setLoading } = props;
+  const searchQuery = useStore((state) => state.searchQuery);
+  const setSearchQuery = useStore.getState().setSearchQuery;
 
   const [invalidSummName, setInvalidSummName] = React.useState(false);
 
@@ -43,7 +44,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
       },
       body: JSON.stringify({ summName }),
     }).then(() => {
-      setSummQuery(summName);
+      setSearchQuery(summName);
       setLoading(false);
     });
   };
@@ -59,6 +60,10 @@ const SummForm: React.FC<Props> = (props: Props) => {
       setInvalidSummName(false);
     }
   };
+
+  React.useEffect(() => {
+    console.log(searchQuery);
+  }, [searchQuery]);
 
   return (
     <div css={formContainer}>
@@ -92,7 +97,7 @@ const SummForm: React.FC<Props> = (props: Props) => {
         </Flex>
         <button
           css={submitButt}
-          disabled={invalidSummName}
+          disabled={invalidSummName || summName.length < 4}
           onClick={handleSubmit(handlePostData)}
         >
           submit

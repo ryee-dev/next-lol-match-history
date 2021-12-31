@@ -3,18 +3,24 @@ import MatchCard from '../MatchCard';
 
 import { listWrapper, resultsModal } from './SummResults.css';
 import { ResultsProps } from '@/utils/types';
+import { useStore } from '@/store';
 
 const SummResults: React.FC<ResultsProps> = (props: ResultsProps) => {
-  const { summQuery, data, staticData } = props;
+  const { data, staticData } = props;
+  const searchQuery = useStore((state) => state.searchQuery);
+
+  React.useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div css={resultsModal}>
-      <h1>{summQuery}</h1>
+      <h1>{searchQuery}</h1>
       <div css={listWrapper}>
         {data &&
           data.map((match: any, index: number) => {
             return (
-              match.creepScore !== undefined && (
+              match && (
                 <MatchCard
                   staticData={staticData}
                   key={index}

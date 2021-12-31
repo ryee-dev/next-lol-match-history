@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Spinner } from '@chakra-ui/react';
-import { NextPage } from 'next';
-import { appShell, modalWrapper, spinnerWrapper } from '@/index.css';
-import { DDragon } from '@fightmegg/riot-api';
-import { BuildStaticData } from '@/utils/buildStaticData';
-import useSWR from 'swr';
-import { SummForm, SummResults } from '@/components';
-import useOnClickOutside from 'use-onclickoutside';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { Container, Spinner } from "@chakra-ui/react";
+import { NextPage } from "next";
+import { appShell, modalWrapper, spinnerWrapper } from "@/index.css";
+import { DDragon } from "@fightmegg/riot-api";
+import { BuildStaticData } from "@/utils/buildStaticData";
+import useSWR from "swr";
+import { SummForm, SummResults } from "@/components";
+import useOnClickOutside from "use-onclickoutside";
+import { motion } from "framer-motion";
+import { useStore } from "@/store";
 
 // import CloseIcon from '../public/close.svg';
 // import Image from 'next/image';
@@ -48,27 +49,30 @@ export const getStaticProps = async () => {
 
 const SummonersRift: NextPage = ({ rawStaticData }: any) => {
   // const { champList, itemList, spellList, runeList } = rawStaticData;
+
   const ref = React.useRef(null);
+  const searchQuery = useStore((state) => state.searchQuery);
+  const setSearchQuery = useStore.getState().setSearchQuery;
 
   const [modalStatus, setModalStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pageError, setPageError] = useState(false);
   const [summData, setSummData] = useState(null);
   const [summName, setSummName] = useState(``);
-  const [summQuery, setSummQuery] = useState(``);
+  // const [summQuery, setSummQuery] = useState(``);
   const [staticData, setStaticData] = useState(null);
 
   const closeModal = () => {
     setModalStatus(false);
     setSummData(null);
-    setSummQuery(``);
     setSummName(``);
+    setSearchQuery('');
   };
 
   useOnClickOutside(ref, closeModal);
 
-  const { data, isValidating } = useSWR(
-    summQuery.length !== 0 && loading ? '/api/summoner/' : null,
+  const { isValidating } = useSWR(
+    searchQuery.length !== 0 && loading ? '/api/summoner/' : null,
     fetcher,
     {
       onSuccess: (data) => {
@@ -76,7 +80,7 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
         setPageError(false);
         setLoading(false);
         setModalStatus(true);
-        console.log(summQuery, `fetched`);
+        console.log(searchQuery, `fetched`);
       },
       onError: (err) => {
         setPageError(true);
@@ -103,17 +107,11 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
     setStaticData(formattedStaticData);
   }, [rawStaticData]);
 
-  useEffect(() => {
-    summData && console.log(summData);
-  }, [summData]);
-
   return (
     <Container maxW="auto" css={appShell} onKeyDown={handleEscClose}>
       <SummForm
         setSummName={setSummName}
-        setSummQuery={setSummQuery}
         summName={summName}
-        summQuery={summQuery}
         setLoading={setLoading}
       />
       {loading && (
@@ -128,11 +126,7 @@ const SummonersRift: NextPage = ({ rawStaticData }: any) => {
           css={modalWrapper}
           ref={ref}
         >
-          <SummResults
-            staticData={staticData}
-            data={summData}
-            summQuery={summQuery}
-          />
+          <SummResults staticData={staticData} data={summData} />
         </motion.div>
       )}
     </Container>

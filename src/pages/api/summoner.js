@@ -46,6 +46,7 @@ export default async function handler(req, res) {
         participants,
       },
     } = matchData;
+    // console.log(participants);
 
     for (const {
       win,
@@ -70,7 +71,8 @@ export default async function handler(req, res) {
       summoner2Id,
       summonerName,
     } of participants) {
-      if (nameInput === summonerName) {
+      console.log(nameInput, summonerName.toLowerCase());
+      if (nameInput === summonerName.toLowerCase()) {
         return {
           gameId,
           gameMode,
@@ -129,7 +131,8 @@ export default async function handler(req, res) {
     const riftMatchHistory = await handleGetMatchHistory(formattedSummName);
 
     for (const element of riftMatchHistory) {
-      matchIdList.push(element.gameId);
+      console.log(element);
+      matchIdList.push(element);
     }
 
     for (let i = 0; i < 5; i++) {
@@ -138,6 +141,7 @@ export default async function handler(req, res) {
         finalResponse.push(handleBuildData(res, formattedSummName));
       });
     }
+    console.log(finalResponse);
     return finalResponse;
   };
 

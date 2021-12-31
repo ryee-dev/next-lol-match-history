@@ -50,7 +50,6 @@ interface MatchDataProps {
 
 interface ResultsProps {
   data: any;
-  // summQuery: string;
   staticData: any;
 }
 
